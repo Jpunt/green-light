@@ -1,0 +1,39 @@
+{
+  "name": "green-light",
+  "version": "0.0.0",
+  "author": "Jasper Haggenburg",
+  "description": "An opinionated (but complete) set of tools for functional testing",
+  "license": "ISC",
+  "homepage": "https://github.com/jpunt/green-light#readme",
+  "keywords": [
+    "testing",
+    "functional",
+    "tests",
+    "mocked-api",
+    "mocha",
+    "chai"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpunt/green-light.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jpunt/green-light/issues"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "compile": "babel src --out-dir lib",
+    "prepublish": "npm run compile",
+    "test": "mocha --compilers js:babel-register",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "babel-cli": "^6.4.5",
+    "babel-core": "^6.4.5",
+    "babel-eslint": "^4.1.8",
+    "babel-preset-es2015": "^6.3.13",
+    "chai": "^3.5.0",
+    "eslint": "^1.10.3",
+    "mocha": "^2.4.5"
+  }
+}
