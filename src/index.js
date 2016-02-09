@@ -62,13 +62,20 @@ export default class GreenLight {
 
       const api = this.API.setup(config);
 
+      if (!config.name) {
+        // handy shortcut:
+        this.api = api;
+      } else {
+        // should be referenced with GreenLight.API.getByName()
+      }
+
       api.start(err => {
         if (err) {
           throw err;
         }
 
-        if (!config.name) {
-          this.api = api;
+        if (config.verbose) {
+          console.log('API ready');
         }
 
         resolve();
@@ -85,7 +92,12 @@ export default class GreenLight {
     }
 
     this.target = new Target(config);
-    return this.target.start();
+    return this.target.start().then(() => {
+      if (config.verbose) {
+        console.log('Target ready');
+      }
+      Promise.resolve();
+    });
   }
 
   /*
@@ -97,7 +109,12 @@ export default class GreenLight {
     }
 
     this.browser = new Browser(config);
-    return this.browser.start();
+    return this.browser.start().then(() => {
+      if (config.verbose) {
+        console.log('Browser ready');
+      }
+      Promise.resolve();
+    });
   }
 
   /*
@@ -105,11 +122,16 @@ export default class GreenLight {
    */
   runTests(config) {
     if (config.verbose) {
-      console.log('Initializing Mocha...');
+      console.log('Initializing tests...');
     }
 
     this.tests = new Tests(config);
-    return this.tests.start();
+    return this.tests.start().then(() => {
+      if (config.verbose) {
+        console.log('Tests ready');
+      }
+      Promise.resolve();
+    });
   }
 }
 

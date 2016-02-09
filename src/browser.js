@@ -10,10 +10,6 @@ export default class Browser {
 
   start() {
     return new Promise((resolve, reject) => {
-      if (this.config.verbose) {
-        console.log('Setting up browser');
-      }
-
       // Setup jQuery
       if (this.config.jQuery) {
         // TODO: Use readFile-not-sync
