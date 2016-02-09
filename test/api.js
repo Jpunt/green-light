@@ -2,21 +2,29 @@ import { expect } from 'chai';
 
 let GL;
 
+function kill() {
+  GL = require('../src');
+  const API = GL.API;
+  [API.api, API.getByName('a'), API.getByName('b')].forEach(api => {
+    if (api) {
+      api.stop();
+    }
+  });
+}
+
 describe('API', () => {
   beforeEach(() => {
     // Stop earlier processes
-    GL = require('../src');
-    const API = GL.API;
-    [API.api, API.getByName('a'), API.getByName('b')].forEach(api => {
-      if (api) {
-        api.stop();
-      }
-    });
+    kill();
 
     // Start new process
     delete require.cache[require.resolve('mocked-api')];
     delete require.cache[require.resolve('../src')];
     GL = require('../src');
+  });
+
+  afterEach(() => {
+    kill();
   });
 
   it('initializes single API', (done) => {
