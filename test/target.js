@@ -2,19 +2,27 @@ import { expect } from 'chai';
 
 let GL;
 
+function kill() {
+  GL = require('../src');
+  const target = GL.target;
+  if (target) {
+    target.stop();
+  }
+}
+
 describe('Target', () => {
   beforeEach(() => {
     // Stop earlier processes
-    GL = require('../src');
-    const target = GL.target;
-    if (target) {
-      target.stop();
-    }
+    kill();
 
     // Start new process
     delete require.cache[require.resolve('./target')];
     delete require.cache[require.resolve('../src')];
     GL = require('../src');
+  });
+
+  afterEach(() => {
+    kill();
   });
 
   it('initializes Target', (done) => {
@@ -23,8 +31,8 @@ describe('Target', () => {
     GL
       .initTarget({
         cmd: `${__dirname}/utils/fake-server.js`,
-        url: 'http://localhost:6666',
-        interval: 200,
+        url: 'http://localhost:4000',
+        interval: 100,
       })
       .then(() => {
         expect(GL.Target).to.exist;

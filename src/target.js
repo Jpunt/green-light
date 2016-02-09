@@ -48,8 +48,10 @@ export default class Target {
   }
 
   stop() {
-    this.process.stdin.pause();
-    this.process.kill();
+    if (this.process) {
+      this.process.stdin.pause();
+      this.process.kill('SIGINT');
+    }
   }
 
   check() {
