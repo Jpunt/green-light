@@ -43,12 +43,12 @@ export default class Browser {
       this._getDOM(url)
         .then(window => {
           return new Promise((resolve, reject) => {
-            if (this.config.setupWindow) {
-              return this.config.setupWindow(window, () => {
-                resolve(window);
-              });
+            if (!this.config.setupWindow) {
+              return resolve(window);
             }
-            resolve(window);
+            this.config.setupWindow(window, () => {
+              resolve(window);
+            });
           });
         })
         .then(window => resolve(window))
@@ -82,20 +82,4 @@ export default class Browser {
       });
     });
   }
-
-  // _setupWindow(window) {
-  //   return new Promise((resolve, reject) => {
-  //     window.$.findByTestRef = testRef => {
-  //       const $el = window.$(`[data-test-ref=${testRef}]`);
-  //       return $el.length > 0 ? $el.first() : null;
-  //     };
-  //
-  //     window.$.findAllByTestRef = testRef => {
-  //       return window.$(`[data-test-ref=${testRef}]`);
-  //     };
-  //
-  //     // TODO: loopje ipv settimeout
-  //     setTimeout(() => resolve(window), 200);
-  //   });
-  // }
 }

@@ -29,7 +29,7 @@ describe('Target', () => {
     expect(GL.target).not.to.exist;
 
     GL
-      .initTarget({
+      .runTarget({
         cmd: `${__dirname}/utils/fake-server.js`,
         url: 'http://localhost:4000',
         interval: 100,

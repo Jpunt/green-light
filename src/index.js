@@ -4,7 +4,7 @@ import Chai from 'chai';
 
 import Target from './target';
 import Browser from './browser';
-import MochaRunner from './tests';
+import Tests from './tests';
 
 export default class GreenLight {
   constructor() {
@@ -14,61 +14,64 @@ export default class GreenLight {
     this.target = null;
     this.Target = Target;
 
-    this.mochaRunner = null;
-    this.MochaRunner = MochaRunner;
-
     this.browser = null;
     this.Browser = Browser;
+
+    this.tests = null;
+    this.Tests = Tests;
 
     this.expect = Chai.expect;
   }
 
-  init(config) {
-    return new Promise((resolve, reject) => {
-      if (config.verbose) {
-        console.log('Initializing GreenLight...');
-      }
-      resolve();
-    });
+  init() {
+    return Promise.resolve();
   }
 
-  start() {
-    this.mochaRunner.start()
-      .then(this.cleanup)
-      .then(code => process.exit(code))
-      .catch(err => this.fail(err));
-  }
-
-  cleanup(code) {
-    return new Promise((resolve, reject) => {
-      terminate(process.pid, (err) => {
-        err ? reject(err) : resolve(code);
-      });
+  done(exitCode) {
+    return this.clean().then(() => {
+      process.exit(exitCode);
     });
   }
 
   fail(err) {
-    console.error(err);
-    this.cleanup()
-      .then(() => process.exit(1))
-      .catch(() => process.exit(1));
+    return this.clean().then(() => {
+      console.error(err.stack || err);
+      process.exit(1);
+    });
+  }
+
+  clean() {
+    return new Promise((resolve, reject) => {
+      terminate(process.pid, (err) => {
+        if (err) {
+          throw err;
+        }
+        resolve();
+      });
+    });
   }
 
   /*
    * API
    */
-  initAPI(config) {
+  runAPI(config) {
     return new Promise((resolve, reject) => {
       if (config.verbose) {
         console.log('Initializing API...');
       }
 
       const api = this.API.setup(config);
+
       api.start(err => {
+        if (err) {
+          throw err;
+        }
+
         if (!config.name) {
           this.api = api;
         }
-        err ? reject(err) : resolve();
+
+        resolve();
       });
     });
   }
@@ -76,43 +79,37 @@ export default class GreenLight {
   /*
    * Target
    */
-  initTarget(config) {
-    return new Promise((resolve, reject) => {
-      if (config.verbose) {
-        console.log('Initializing target...');
-      }
+  runTarget(config) {
+    if (config.verbose) {
+      console.log('Initializing target...');
+    }
 
-      this.target = new Target(config);
-      this.target.start().then(resolve, reject);
-    });
+    this.target = new Target(config);
+    return this.target.start();
   }
 
   /*
    * Browser
    */
-  initBrowser(config) {
-    return new Promise((resolve, reject) => {
-      if (config.verbose) {
-        console.log('Initializing browser...');
-      }
+  runBrowser(config) {
+    if (config.verbose) {
+      console.log('Initializing browser...');
+    }
 
-      this.browser = new Browser(config);
-      this.browser.start().then(resolve, reject);
-    });
+    this.browser = new Browser(config);
+    return this.browser.start();
   }
 
   /*
    * Mocha
    */
-  initMocha(config) {
-    return new Promise((resolve, reject) => {
-      if (config.verbose) {
-        console.log('Initializing Mocha...');
-      }
+  runTests(config) {
+    if (config.verbose) {
+      console.log('Initializing Mocha...');
+    }
 
-      this.mochaRunner = new MochaRunner(config);
-      resolve();
-    });
+    this.tests = new Tests(config);
+    return this.tests.start();
   }
 }
 

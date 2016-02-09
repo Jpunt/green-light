@@ -35,7 +35,7 @@ describe('Browser', () => {
     expect(GL.browser).not.to.exist;
 
     GL
-      .initBrowser({
+      .runBrowser({
         url: 'http://localhost:4000',
       })
       .then(() => {
@@ -57,7 +57,7 @@ describe('Browser', () => {
     expect(GL.browser).not.to.exist;
 
     GL
-      .initBrowser({
+      .runBrowser({
         url: 'http://localhost:4000',
         jQuery: true,
       })
@@ -77,7 +77,7 @@ describe('Browser', () => {
 
   it('initializes Browser and waits for response', (done) => {
     GL
-      .initBrowser({
+      .runBrowser({
         url: 'http://localhost:4000',
         setupWindow: (window, callback) => {
           window.extraStuff = 42;

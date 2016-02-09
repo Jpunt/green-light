@@ -31,7 +31,7 @@ describe('API', () => {
     expect(GL.api).not.to.exist;
 
     GL
-      .initAPI({ port:3000, dir:'./mocks' })
+      .runAPI({ port:3000, dir:'./mocks' })
       .then(() => {
         expect(GL.API).to.exist;
         expect(GL.api).to.exist;
@@ -44,7 +44,7 @@ describe('API', () => {
     expect(GL.API.getByName('b')).not.to.exist;
 
     GL
-      .initAPI({ name:'a', port:3000, dir:'./mocks' })
+      .runAPI({ name:'a', port:3000, dir:'./mocks' })
       .then(() => {
         expect(GL.API).to.exist;
         expect(GL.api).not.to.exist;
@@ -53,7 +53,7 @@ describe('API', () => {
       });
 
     GL
-      .initAPI({ name:'b', port:3001, dir:'./mocks' })
+      .runAPI({ name:'b', port:3001, dir:'./mocks' })
       .then(() => {
         expect(GL.API).to.exist;
         expect(GL.api).not.to.exist;
