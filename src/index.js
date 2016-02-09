@@ -2,6 +2,7 @@ import MockedApi from 'mocked-api';
 import terminate from 'terminate';
 import Chai from 'chai';
 
+import { parseConfigFor } from './config-helper';
 import Target from './target';
 import Browser from './browser';
 import Tests from './tests';
@@ -55,6 +56,8 @@ export default class GreenLight {
    * API
    */
   runAPI(config) {
+    config = parseConfigFor('api', config);
+
     return new Promise((resolve, reject) => {
       if (config.verbose) {
         console.log('Initializing API...');
@@ -87,6 +90,8 @@ export default class GreenLight {
    * Target
    */
   runTarget(config) {
+    config = parseConfigFor('target', config);
+
     if (config.verbose) {
       console.log('Initializing target...');
     }
@@ -104,6 +109,8 @@ export default class GreenLight {
    * Browser
    */
   runBrowser(config) {
+    config = parseConfigFor('browser', config);
+
     if (config.verbose) {
       console.log('Initializing browser...');
     }
@@ -121,6 +128,8 @@ export default class GreenLight {
    * Mocha
    */
   runTests(config) {
+    config = parseConfigFor('tests', config);
+
     if (config.verbose) {
       console.log('Initializing tests...');
     }
