@@ -18,7 +18,7 @@ export default class Browser {
       if (this.config.jQuery) {
         // TODO: Use readFile-not-sync
         // TODO: Use jquery from package
-        const jQueryPath = path.resolve(__dirname, './jquery.js');
+        const jQueryPath = path.resolve(__dirname, './jquery/jquery.js');
         this.jQuery = fs.readFileSync(jQueryPath).toString();
       }
 
