@@ -1,7 +1,7 @@
 import Mocha from 'mocha';
 import glob from 'glob';
 
-export default class MochaRunner {
+export default class Tests {
   constructor(config) {
     this.config = config;
     this.mocha = new Mocha(this.config.mocha);
