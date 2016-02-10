@@ -66,7 +66,8 @@ The actual code you'll be writing to test your project. Based on [mocha](https:/
 
 ## Don't use this if
 - You can't (or don't want to) run Node.
-- You want to use Jasmine, Karma, CasperJS, RSpec, PhantomJS, Nightwatch, NodeUnit, Shoulda, Velocity, Protractor, Mockito, Sinon, Cucumber, ZombieJS, Selenium, JUnit, or whatever. GreenLight works with [mocha](https://www.npmjs.com/package/mocha), [chai](https://www.npmjs.com/package/chai), [jsdom](https://www.npmjs.com/package/jsdom) and [mocked-api](https://www.npmjs.com/package/mocked-api). These tools are great (or good enough) and support for anything else is not worth the complexity.
+- You want to use Jasmine, Karma, CasperJS, RSpec, PhantomJS, Nightwatch, NodeUnit, Shoulda, Velocity, Protractor, Mockito, Sinon, Cucumber, ZombieJS, Selenium, JUnit, or whatever.
+GreenLight works with [mocha](https://www.npmjs.com/package/mocha), [chai](https://www.npmjs.com/package/chai), [jsdom](https://www.npmjs.com/package/jsdom) and [mocked-api](https://www.npmjs.com/package/mocked-api). These tools are great (or good enough) and support for anything else is not worth the complexity.
 - You don't want to write functional tests. Unit-tests, for example, are awesome in some cases, but you don't need GreenLight for that. If you want to do something else than functional testing, I'd suggest to use plain Mocha instead. This doesn't mean that you can't combine different kinds of testing though! It's not weird to do both unit-testing and functional-testing for the same app (where appropriate).
 - Your project doesn't get its data from an API that you can mock. A large part of functional testing is to simulate different kinds of data and test how your app is responding to that. If you can't do that, GreenLight is probably not a greath fit and you should go with a different kind of setup.
 
