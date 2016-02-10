@@ -7,13 +7,13 @@ export default class Browser {
   constructor(config) {
     this.config = {
       verbose: config.verbose,
-      url: config.url,
+      baseUrl: config.baseUrl,
       jQuery: config.jQuery,
       setupWindow: config.setupWindow || (w => Promise.resolve(w)),
     };
 
-    if (!this.config.url) {
-      throw new Error('No url set for Browser');
+    if (!this.config.baseUrl) {
+      throw new Error('No baseUrl set for Browser');
     }
   }
 
@@ -36,7 +36,7 @@ export default class Browser {
   }
 
   go(path) {
-    const url = this.config.url + path;
+    const url = this.config.baseUrl + path;
 
     if (this.config.verbose) {
       console.log('Going to url:', url);
