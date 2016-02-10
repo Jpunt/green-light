@@ -75,8 +75,8 @@ To setup the mocked API, add some content to `test/mocks/hello-world.json`:
 and add the following to `test/runner.js`:
 
 ```js
-GreenLight
-  .init()
+// GreenLight
+//   .init()
   .then(() => {
     return GreenLight.runAPI({
       verbose: true,
@@ -89,8 +89,8 @@ GreenLight
       setTimeout(resolve, 100000);
     });
   })
-  .then(exitCode => GreenLight.done(exitCode))
-  .catch(err => GreenLight.fail(err));
+//  .then(exitCode => GreenLight.done(exitCode))
+//  .catch(err => GreenLight.fail(err));
 ```
 
 That extra promise and timeout are there to check out what's going on. Run `npm test` and open `http://localhost:4000/hello-world.json` to see if this works as expected.
@@ -99,15 +99,15 @@ That extra promise and timeout are there to check out what's going on. Run `npm 
 The target is your app we want to test. It can be anything, as long as it can be started with a command on your CLI, and it can be configured to connect to the mocked API instead of its regular source. Add `runTarget()` to `test/runner.js`:
 
 ```js
-GreenLight
-  .init()
-  .then(() => {
-    return GreenLight.runAPI({
-      verbose: true,
-      port: 4000,
-      dir: './test/mocks'
-    });
-  })
+// GreenLight
+//   .init()
+//   .then(() => {
+//     return GreenLight.runAPI({
+//       verbose: true,
+//       port: 4000,
+//       dir: './test/mocks'
+//     });
+//   })
   .then(() => {
     return GreenLight.runTarget({
       verbose: true,
@@ -115,13 +115,13 @@ GreenLight
       checkUrl: 'http://localhost:8000', // or whatever page is available as soon as your project is ready
     });
   })
-  .then(() => {
-    return new Promise((resolve, reject) => {
-      setTimeout(resolve, 100000);
-    });
-  })
-  .then(exitCode => GreenLight.done(exitCode))
-  .catch(err => GreenLight.fail(err));
+//  .then(() => {
+//    return new Promise((resolve, reject) => {
+//      setTimeout(resolve, 100000);
+//    });
+//  })
+//  .then(exitCode => GreenLight.done(exitCode))
+//  .catch(err => GreenLight.fail(err));
 ```
 
 After starting the API, your project will start running (and it will be checked periodically to see if it's ready to test).
@@ -130,22 +130,22 @@ After starting the API, your project will start running (and it will be checked 
 The browser will visit your target and can be configured like so:
 
 ```js
-GreenLight
-  .init()
-  .then(() => {
-    return GreenLight.runAPI({
-      verbose: true,
-      port: 4000,
-      dir: './test/mocks'
-    });
-  })
-  .then(() => {
-    return GreenLight.runTarget({
-      verbose: true,
-      command: 'npm start --config=test',
-      checkUrl: 'http://localhost:8000',
-    });
-  })
+// GreenLight
+//   .init()
+//   .then(() => {
+//     return GreenLight.runAPI({
+//       verbose: true,
+//       port: 4000,
+//       dir: './test/mocks'
+//     });
+//   })
+//   .then(() => {
+//     return GreenLight.runTarget({
+//       verbose: true,
+//       command: 'npm start --config=test',
+//       checkUrl: 'http://localhost:8000',
+//     });
+//   })
   .then(() => {
     return GreenLight.runBrowser({
       verbose: true,
@@ -153,13 +153,13 @@ GreenLight
       jQuery: true,
     });
   })
-  .then(() => {
-    return new Promise((resolve, reject) => {
-      setTimeout(resolve, 100000);
-    });
-  })
-  .then(exitCode => GreenLight.done(exitCode))
-  .catch(err => GreenLight.fail(err));
+//  .then(() => {
+//    return new Promise((resolve, reject) => {
+//      setTimeout(resolve, 100000);
+//    });
+//  })
+//  .then(exitCode => GreenLight.done(exitCode))
+//  .catch(err => GreenLight.fail(err));
 ```
 
 ## Tests
@@ -201,7 +201,54 @@ describe('Article', () => {
 });
 ```
 
-Now we can remove that debugging and configure the last step in `test/runner.js`:
+Now we can configure the last step in `test/runner.js`:
+
+```js
+// GreenLight
+//   .init()
+//   .then(() => {
+//     return GreenLight.runAPI({
+//       verbose: true,
+//       port: 4000,
+//       dir: './test/mocks'
+//     });
+//   })
+//   .then(() => {
+//     return GreenLight.runTarget({
+//       verbose: true,
+//       command: 'npm start --config=test',
+//       checkUrl: 'http://localhost:8000',
+//     });
+//   })
+//   .then(() => {
+//     return GreenLight.runBrowser({
+//       verbose: true,
+//       baseUrl: 'http://localhost:8000',
+//       jQuery: true,
+//     });
+//   })
+  .then(() => {
+    return GreenLight.runTests({
+      verbose: true,
+      glob: 'test/tests/**/*.js',
+      mocha: {
+        reporter: 'list',
+        timeout: 5000,
+        ui: 'bdd',
+      }
+    });
+  })
+//  .then(() => {
+//    return new Promise((resolve, reject) => {
+//      setTimeout(resolve, 100000);
+//    });
+//  })
+//  .then(exitCode => GreenLight.done(exitCode))
+//  .catch(err => GreenLight.fail(err));
+```
+
+# Congratulations
+Remove that debugging and you should be good to go:
 
 ```js
 GreenLight
@@ -238,8 +285,7 @@ GreenLight
   .catch(err => GreenLight.fail(err));
 ```
 
-# Congratulations
-You should be good to go. For more advanced options, take a look at:
+For more advanced options, take a look at:
 
 - [API](api.md)
 - [Target](target.md)
