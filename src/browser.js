@@ -5,55 +5,50 @@ import fs from 'fs';
 
 export default class Browser {
   constructor(config) {
-    this.config = config;
+    this.config = {
+      verbose: config.verbose,
+      url: config.url,
+      jQuery: config.jQuery,
+      setupWindow: config.setupWindow || (w => Promise.resolve(w)),
+    };
+
+    if (!this.config.url) {
+      throw new Error('No url set for Browser');
+    }
   }
 
   start() {
-    return new Promise((resolve, reject) => {
-      // Setup jQuery
-      if (this.config.jQuery) {
-        // TODO: Use readFile-not-sync
-        // TODO: Use jquery from package
-        const jQueryPath = path.resolve(__dirname, './jquery/jquery.js');
-        this.jQuery = fs.readFileSync(jQueryPath).toString();
-      }
+    // Setup jQuery
+    if (this.config.jQuery) {
+      // TODO: Use readFile-not-sync
+      // TODO: Use jquery from package
+      const jQueryPath = path.resolve(__dirname, './jquery/jquery.js');
+      this.jQuery = fs.readFileSync(jQueryPath).toString();
+    }
 
-      // Setup console
-      if (this.config.verbose) {
-        this.virtualConsole = jsdom.createVirtualConsole();
-        this.virtualConsole.sendTo(console);
-      }
+    // Setup console
+    if (this.config.verbose) {
+      this.virtualConsole = jsdom.createVirtualConsole();
+      this.virtualConsole.sendTo(console);
+    }
 
-      resolve();
-    });
+    return Promise.resolve();
   }
 
   go(path) {
-    return new Promise((resolve, reject) => {
-      const url = this.config.url + path;
+    const url = this.config.url + path;
 
-      if (this.config.verbose) {
-        console.log('Going to url:', url);
-      }
+    if (this.config.verbose) {
+      console.log('Going to url:', url);
+    }
 
-      this._getDOM(url)
-        .then(window => {
-          return new Promise((resolve, reject) => {
-            if (!this.config.setupWindow) {
-              return resolve(window);
-            }
-            this.config.setupWindow(window, () => {
-              resolve(window);
-            });
-          });
-        })
-        .then(window => resolve(window))
-        .catch(err => {
-          console.error('Something went wrong');
-          console.error('url:', url);
-          console.error('error:', err);
-        });
-    });
+    return this._getDOM(url)
+      .then(window => this.config.setupWindow(window))
+      .catch(err => {
+        console.error('Something went wrong');
+        console.error('url:', url);
+        console.error('error:', err);
+      });
   }
 
   _getDOM(url) {

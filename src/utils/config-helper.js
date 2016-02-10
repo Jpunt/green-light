@@ -32,7 +32,6 @@ const cli = commandLineArgs([
    */
   { name: 'tests-verbose', type: Boolean },
   { name: 'tests-glob', type: String },
-
   { name: 'tests-mocha-grep', type: String },
   { name: 'tests-mocha-ui', type: String },
   { name: 'tests-mocha-reporter', type: String },

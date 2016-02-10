@@ -79,9 +79,11 @@ describe('Browser', () => {
     GL
       .runBrowser({
         url: 'http://localhost:4000',
-        setupWindow: (window, callback) => {
+        setupWindow: (window) => {
           window.extraStuff = 42;
-          setTimeout(callback, 200);
+          return new Promise((resolve, reject) => {
+            setTimeout(() => resolve(window), 200);
+          });
         },
       })
       .then(() => {
