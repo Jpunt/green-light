@@ -2,7 +2,7 @@ import MockedApi from 'mocked-api';
 import terminate from 'terminate';
 import Chai from 'chai';
 
-import { parseConfigFor } from './config-helper';
+import { parseConfigFor } from './utils/config-helper';
 import Target from './target';
 import Browser from './browser';
 import Tests from './tests';

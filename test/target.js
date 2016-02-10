@@ -30,9 +30,9 @@ describe('Target', () => {
 
     GL
       .runTarget({
-        cmd: `${__dirname}/utils/fake-server.js`,
-        url: 'http://localhost:4000',
-        interval: 100,
+        command: `${__dirname}/utils/fake-server.js`,
+        checkUrl: 'http://localhost:4000',
+        checkInterval: 100,
       })
       .then(() => {
         expect(GL.Target).to.exist;

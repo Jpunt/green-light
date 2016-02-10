@@ -15,7 +15,7 @@ const cli = commandLineArgs([
    * Target
    */
   { name: 'target-verbose', type: Boolean },
-  { name: 'target-cmd', type: String },
+  { name: 'target-command', type: String },
   { name: 'target-url', type: String },
   { name: 'target-interval', type: Number },
 
