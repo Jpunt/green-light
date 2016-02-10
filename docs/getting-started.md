@@ -40,7 +40,7 @@ GreenLight
   });
 ```
 
-To make things easier later on, I'd recommend installing Babel for fancy ES6-support:
+To make things easier later on, I'd recommend installing [Babel](https://babeljs.io) for fancy ES6-support:
 
 ```
 npm install --save-dev babel-core babel-preset-es2015 babel-register
@@ -61,7 +61,7 @@ GreenLight
 
 > Watch out: `require('babel-register')` makes it possible to do new stuff in nested files, but not in `runner.js` itself. While newer versions of Node support things like fat arrows, you have to `require` `GreenLight` here the old way :(
 
-Alright, `npm test` still doesn't do a lot, but we'll get to that. Let's start with the API.
+Well... `npm test` still doesn't do a lot, but we'll get to that. Let's start with the API.
 
 ## API
 To setup the mocked API, add some content to `test/mocks/hello-world.json`:
@@ -96,7 +96,7 @@ GreenLight
 That extra promise and timeout are there to check out what's going on. Run `npm test` and open `http://localhost:4000/hello-world.json` to see if this works as expected.
 
 ## Target
-The target is your app we want to test. It can be anything, as long as it can be started with a command on the command line, and it can be configured to connect to the mocked API instead of its regular source. Add `runTarget()` to `test/runner.js`:
+The target is your app we want to test. It can be anything, as long as it can be started with a command on your CLI, and it can be configured to connect to the mocked API instead of its regular source. Add `runTarget()` to `test/runner.js`:
 
 ```js
 GreenLight
@@ -124,7 +124,7 @@ GreenLight
   .catch(err => GreenLight.fail(err));
 ```
 
-After starting the API, `npm test` will now start your project and check it periodically to see if it's ready to test.
+After starting the API, your project will start running (and it will be checked periodically to see if it's ready to test).
 
 ## Browser
 The browser will visit your target and can be configured like so:
@@ -149,7 +149,7 @@ GreenLight
   .then(() => {
     return GreenLight.runBrowser({
       verbose: true,
-      url: 'http://localhost:8000', // Or wherever your project is running
+      baseUrl: 'http://localhost:8000', // Or wherever your project is running
       jQuery: true,
     });
   })
@@ -220,7 +220,7 @@ GreenLight
   })
   .then(() => {
     return GreenLight.runBrowser({
-      url: 'http://localhost:8000',
+      baseUrl: 'http://localhost:8000',
       jQuery: true,
     });
   })
