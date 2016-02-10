@@ -3,7 +3,12 @@ import glob from 'glob';
 
 export default class Tests {
   constructor(config) {
-    this.config = config;
+    this.config = {
+      verbose: config.verbose,
+      glob: config.glob || './test/**/*.js',
+      mocha: config.mocha || {},
+    };
+
     this.mocha = new Mocha(this.config.mocha);
   }
 
