@@ -80,9 +80,6 @@ export default class Target {
       const interval = setInterval(() => {
         this.check()
           .then(() => {
-            if (this.config.verbose) {
-              console.log('Target is ready');
-            }
             clearInterval(interval);
             resolve();
           })
