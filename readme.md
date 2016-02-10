@@ -42,7 +42,7 @@ describe('article title', () => {
 GreenLight bundles all the tools you'll need to do exactly this.  It can be configured and runned with Node.
 
 ## Getting started
-Check out an example of a setup [over here](#TODO), follow the steps in the [getting started guide](docs/getting-started.md), or take a look at the documentation for each part of GreenLight for more details:
+Follow the steps in the [getting started guide](docs/getting-started.md), check out an example of a setup [over here](#TODO), or take a look at the documentation for each part of GreenLight for more details:
 
 ### API
 A mocked version of your API, to control what data is returned for certain URL's and usecases. Based on [mocked-api](https://www.npmjs.com/package/mocked-api).

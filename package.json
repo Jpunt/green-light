@@ -11,7 +11,8 @@
     "tests",
     "mocked-api",
     "mocha",
-    "chai"
+    "chai",
+    "jsdom"
   ],
   "repository": {
     "type": "git",
