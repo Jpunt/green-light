@@ -1,4 +1,4 @@
-# GreenLight
+# 🚦GreenLight
 There are a lot of ways you can test your project. You can go with unit-testing, integration-testing, end-to-end-testing, or by manually clicking around your site to see everything still works.
 
 My personal favorite is **functional testing**. Write tests for each functionality of your project, simulate different circumstances which this specific part can run in and make sure everything is still O.K. An example would be:
