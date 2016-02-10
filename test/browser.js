@@ -19,7 +19,7 @@ describe('Browser', () => {
     // Start new process
     delete require.cache[require.resolve('../src')];
     GL = require('../src');
-    fakeServer = spawn('./test/utils/fake-server.js');
+    fakeServer = spawn('./test/utils/fake-server');
     fakeServer.stdout.on('data', data => {
       if (data.toString().indexOf('listening') > -1) {
         done();

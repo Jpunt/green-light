@@ -8,13 +8,14 @@ export default class Target {
     this.config = {
       verbose: config.verbose,
       command: config.command,
+      cwd: config.cwd,
       checkUrl: config.checkUrl,
       checkInterval: config.checkInterval || 1000,
       // TODO: checkTimeout
     };
 
     if (!this.config.command) {
-      throw new Error('No command set to run target');
+      throw new Error('No command or file set to run target');
     }
 
     if (!this.config.checkUrl) {
@@ -49,13 +50,23 @@ export default class Target {
     return Promise.resolve();
   }
 
+  startProcess() {
+    const splitted = this.config.command.split(' ');
+    const command = splitted[0];
+    const args = splitted.slice(1);
+    const options = {
+      cwd: this.config.cwd,
+    };
+    this.process = spawn(command, args, options);
+  }
+
   buildTarget() {
     return new Promise((resolve, reject) => {
       if (this.config.verbose) {
         console.log('Building target...');
       }
 
-      this.process = spawn(this.config.command);
+      this.startProcess();
 
       this.process.on('close', code => {
         reject(new Error(`Could not build Target: ${code}`));
