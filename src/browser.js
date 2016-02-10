@@ -66,7 +66,7 @@ export default class Browser {
             return reject(err);
           }
           if (!window) {
-            return reject('no window');
+            return reject(new Error('no window'));
           }
           resolve(window);
         },
