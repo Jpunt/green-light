@@ -24,7 +24,7 @@ const cli = commandLineArgs([
    */
   { name: 'browser-verbose', type: Boolean },
   { name: 'browser-url', type: String },
-  { name: 'browser-jquery', type: Boolean },
+  { name: 'browser-jQuery', type: Boolean },
 
   /*
    * Tests

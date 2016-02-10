@@ -11,11 +11,11 @@ export default class Browser {
   start() {
     return new Promise((resolve, reject) => {
       // Setup jQuery
-      if (this.config.jquery) {
+      if (this.config.jQuery) {
         // TODO: Use readFile-not-sync
         // TODO: Use jquery from package
-        const jqueryPath = path.resolve(__dirname, './jquery/jquery.js');
-        this.jquery = fs.readFileSync(jqueryPath).toString();
+        const jQueryPath = path.resolve(__dirname, './jquery/jquery.js');
+        this.jQuery = fs.readFileSync(jQueryPath).toString();
       }
 
       // Setup console
@@ -60,7 +60,7 @@ export default class Browser {
     return new Promise((resolve, reject) => {
       jsdom.env({
         url: url,
-        src: [this.jquery],
+        src: [this.jQuery],
         features: {
           FetchExternalResources: ['script'],
           ProcessExternalResources: ['script'],

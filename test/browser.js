@@ -59,7 +59,7 @@ describe('Browser', () => {
     GL
       .runBrowser({
         url: 'http://localhost:4000',
-        jquery: true,
+        jQuery: true,
       })
       .then(() => {
         expect(GL.browser).to.exist;
