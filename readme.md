@@ -1,12 +1,12 @@
 # GreenLight
-There are a lot of ways you can test your project. You can go with unit-testing, integration/end-to-end-testing, or by manually clicking around your site to see everything still works.
+There are a lot of ways you can test your project. You can go with unit-testing, integration-testing, end-to-end-testing, or by manually clicking around your site to see everything still works.
 
-My personal favorite is **functional testing**. Write tests for each functionality of your project, simulate different circumstances that this specific part can run in and make sure everything is still O.K. An example would be:
+My personal favorite is **functional testing**. Write tests for each functionality of your project, simulate different circumstances which this specific part can run in and make sure everything is still O.K. An example would be:
 
 ```js
 import { api, browser, expect } from 'green-light';
 
-describe('article', () => {
+describe('article title', () => {
   describe('when it has a title', () => {
     it('renders the title', (done) => {
       api
@@ -39,23 +39,34 @@ describe('article', () => {
 })
 ```
 
-GreenLight bundles all the tools you'll need to do exactly this.  It can be configured and runned with node. Check out an example of a setup [#](over here), or take a look at the documentation for each part of GreenLight for more details:
+GreenLight bundles all the tools you'll need to do exactly this.  It can be configured and runned with node.
+
+## Getting started
+Check out an example of a setup [over here](#), follow the steps in the [getting started guide](docs/getting-started.md), or take a look at the documentation for each part of GreenLight for more details:
 
 ### API
-A mocked version of your API, to control what data is returned for certain URL's and usecases. Based on [mocked-api](https://www.npmjs.com/package/mocked-api). [Read more](docs/api.md).
+A mocked version of your API, to control what data is returned for certain URL's and usecases. Based on [mocked-api](https://www.npmjs.com/package/mocked-api).
+
+[Read more](docs/api.md).
 
 ### Target
-The project you'd like to test, connected to the mocked API.[Read more](docs/target.md).
+The project you'd like to test, connected to the mocked API.
+
+[Read more](docs/target.md).
 
 ### Browser
-A virtual browser that visits the page that you're testing. Based on [jsdom](https://www.npmjs.com/package/jsdom). [Read more](docs/browser.md).
+A virtual browser that visits the page that you're testing. Based on [jsdom](https://www.npmjs.com/package/jsdom).
+
+[Read more](docs/browser.md).
 
 ### Tests
-The actual code you'll be writing to test your project. Based on [mocha](https://www.npmjs.com/package/mocha) and [chai](https://www.npmjs.com/package/chai). [Read more](docs/target.md).
+The actual code you'll be writing to test your project. Based on [mocha](https://www.npmjs.com/package/mocha) and [chai](https://www.npmjs.com/package/chai).
+
+[Read more](docs/target.md).
 
 ## Don't use this if 
 - You can't run node.
-- You want to use Jasmine, Karma, PhantomJS, Nightwatch, Selenium, etc. GreenLight works with Mocha, JSDom and MockedApi. These tools are great and support for anything else is not worth the complexity.
+- You want to use Jasmine, Karma, CasperJS, RSpec, PhantomJS, Nightwatch, NodeUnit, Sinon, Cucumber, ZombieJS, Selenium, JUnit, etc. GreenLight works with Mocha, JSDom and MockedApi. These tools are great and support for anything else is not worth the complexity. 
 - You don't want to write functional tests. Unit-tests, for example, are awesome in some cases, but you don't need GreenLight for that. If you want to do something else than functional testing, I'd suggest to use plain Mocha instead. This doesn't mean that you can't combine different kinds of testing though! It's not weird to do both unit-testing and functional-testing for the same app.
 - Your project doesn't get its data from an API that you can mock. A large part of functional testing is to simulate different kinds of data and test how your app is responding to that. If you can't do that, GreenLight is probably not a greath fit and you should go with a different kind of setup.
 
