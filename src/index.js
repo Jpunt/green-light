@@ -58,31 +58,23 @@ export default class GreenLight {
   runAPI(config) {
     config = parseConfigFor('api', config);
 
-    return new Promise((resolve, reject) => {
+    if (config.verbose) {
+      console.log('Initializing API...');
+    }
+
+    const api = this.API.setup(config);
+
+    if (!config.name) {
+      // handy shortcut:
+      this.api = api;
+    } else {
+      // should be referenced with GreenLight.API.getByName()
+    }
+
+    return api.start().then(() => {
       if (config.verbose) {
-        console.log('Initializing API...');
+        console.log('API ready');
       }
-
-      const api = this.API.setup(config);
-
-      if (!config.name) {
-        // handy shortcut:
-        this.api = api;
-      } else {
-        // should be referenced with GreenLight.API.getByName()
-      }
-
-      api.start(err => {
-        if (err) {
-          throw err;
-        }
-
-        if (config.verbose) {
-          console.log('API ready');
-        }
-
-        resolve();
-      });
     });
   }
 
@@ -101,7 +93,6 @@ export default class GreenLight {
       if (config.verbose) {
         console.log('Target ready');
       }
-      Promise.resolve();
     });
   }
 
@@ -120,7 +111,6 @@ export default class GreenLight {
       if (config.verbose) {
         console.log('Browser ready');
       }
-      Promise.resolve();
     });
   }
 
@@ -139,7 +129,6 @@ export default class GreenLight {
       if (config.verbose) {
         console.log('Tests ready');
       }
-      Promise.resolve();
     });
   }
 }
