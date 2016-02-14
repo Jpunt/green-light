@@ -30,7 +30,7 @@ You can use nested directories to simulate a path-hierarchy. For example, the fi
 
 The configured API will be exposed by GreenLight, to mutate responses from within your tests:
 
-```
+```js
 import { api } from 'green-light';
 ```
 
