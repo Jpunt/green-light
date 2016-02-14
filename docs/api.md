@@ -17,10 +17,14 @@ GreenLight
   });
 ```
 
-In this case, the API will be running on `http://localhost:4000` and will be looking for content in the `./test/mocks` directory.
+Option | Type | Description
+------ | ---- | -----------
+`verbose` | `Boolean` | Enables extensive logging
+`port` | `Integer` | The port that the API will run on
+`dir` | `String` | The directory where your mocked data lives
 
 ## Usage
-Add a json-file in the configured directory and open `http://localhost:4000/example.json` to validate that this is working as expected.
+In this case, the API will be running on `http://localhost:4000` and will be looking for content in the `./test/mocks` directory. Add a json-file in the configured directory and open `http://localhost:4000/example.json` to validate that this is working as expected.
 
 You can use nested directories to simulate a path-hierarchy. For example, the file at `./test/mocks/content/article/42.json` will be served at `http://localhost:4000/content/article/42.json` for the configuration above.
 
@@ -70,8 +74,8 @@ You can override configuration through the CLI:
 Command | Description
 ------- | -------
 `--api-verbose` | Enables extensive logging
-`--api-port` | Runs the API on a different port
-`--api-dir` | Use a different directory
+`--api-port` | The port that the API will run on
+`--api-dir` | The directory where your mocked data lives
 
 
 [Read this](./command-line-overrides.md) for more information about command line overrides.
