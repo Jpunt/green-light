@@ -77,6 +77,7 @@ export default class Target {
         this.process.stderr.pipe(process.stderr);
       }
 
+      // TODO: Use poll() instead: https://www.npmjs.com/package/promise-poll
       const interval = setInterval(() => {
         this.check()
           .then(() => {

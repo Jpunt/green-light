@@ -149,7 +149,7 @@ The browser will visit your target and can be configured like so:
   .then(() => {
     return GreenLight.runBrowser({
       verbose: true,
-      baseUrl: 'http://localhost:8000', // Or wherever your project is running
+      baseUrl: 'http://localhost:8000', // or wherever your project is running
       jQuery: true,
     });
   })
