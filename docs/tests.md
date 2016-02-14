@@ -29,12 +29,12 @@ Option | Type | Description
 `mocha` | `Object` | Configuration of Mocha itself (all options explained on [this page](https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically) can be used here)
 
 ## Usage
-Your tests can be written like you would in regular Mocha, so please refer to the [Mocha documentation](https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically) for more info. `expect` from [chai](https://www.npmjs.com/package/chai) will be exposed by GreenLight:
+Your tests can be written like you would in regular Mocha, so please refer to their [documentation](https://github.com/mochajs/mocha/wiki/Using-mocha-programmatically) for more info. `expect` from [chai](https://www.npmjs.com/package/chai) will be exposed by GreenLight:
 
 ```js
 import { expect } from 'green-light';
 
-describe('Article', () => {
+describe('testing', () => {
   it('works with mocha and chai', (done) => {
     expect(true).to.equal(true);
   });
