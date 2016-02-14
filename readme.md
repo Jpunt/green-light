@@ -62,7 +62,7 @@ A virtual browser that visits the page that you're testing. Based on [jsdom](htt
 ### Tests
 The actual code you'll be writing to test your project. Based on [mocha](https://www.npmjs.com/package/mocha) and [chai](https://www.npmjs.com/package/chai).
 
-[Read more](docs/target.md).
+[Read more](docs/tests.md).
 
 ## Don't use this if
 - You can't (or don't want to) run Node.

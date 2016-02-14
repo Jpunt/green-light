@@ -11,7 +11,7 @@ GreenLight
   .init()
   .then(() => {
     return GreenLight.runBrowser({
-      baseUrl: 'http://localhost:8000' // or wherever your project is running
+      baseUrl: 'http://localhost:8000' // or wherever your target is running
     });
   })
 });
@@ -22,7 +22,7 @@ Option | Type | Description
 `verbose` | `Boolean` | Enables extensive logging
 `baseUrl` | `String` | The URL to be used as the base for `go()` calls. This usually is the domain where your target is running
 `jQuery` | `Boolean` | Injects `jQuery` into the browser
-`setupWindow` | `Function` | Add extra helper-methods for your tests here, or wait for the client to be initialized (always return a resolved promise here!)
+`setupWindow` | `Function` | Add extra helper-methods for your tests here, or wait for the client to be initialized with a `Promise`
 
 ## Usage
 The configured browser will be exposed by GreenLight:
