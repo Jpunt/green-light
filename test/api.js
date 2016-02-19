@@ -13,7 +13,7 @@ function kill() {
 }
 
 describe('API', () => {
-  beforeEach(() => {
+  beforeEach((done) => {
     // Stop earlier processes
     kill();
 
@@ -21,6 +21,9 @@ describe('API', () => {
     delete require.cache[require.resolve('mocked-api')];
     delete require.cache[require.resolve('../src')];
     GL = require('../src');
+
+    // Ready
+    done();
   });
 
   afterEach(() => {
