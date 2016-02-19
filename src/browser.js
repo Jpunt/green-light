@@ -1,7 +1,7 @@
 import jsdom from 'jsdom';
 
 import path from 'path';
-import fs from 'fs'
+import fs from 'fs';
 
 export default class Browser {
   constructor(config) {
