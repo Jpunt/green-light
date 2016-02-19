@@ -26,7 +26,7 @@
     "compile": "babel src --out-dir lib",
     "prepublish": "rm -rf ./lib && npm run compile",
     "test": "NODE_ENV=green-light mocha --compilers js:babel-register --timeout=5000",
-    "lint": "eslint ."
+    "lint": "eslint . --max-warnings 0"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
