@@ -48,7 +48,6 @@ describe('Browser', () => {
             expect(window).to.exist;
             expect(window.$).not.to.exist;
             expect(window.document.querySelector('h1').innerHTML).to.equal('Hello World!');
-            expect(true).to.equal(false);
           });
       })
       .then(done, done);
