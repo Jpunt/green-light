@@ -35,7 +35,7 @@
     "no-unused-vars": [1, {"vars": "all", "args": "none", "varsIgnorePattern": "React"}],
     "curly": 1,
     "object-curly-spacing": [1, "always"],
-    "space-after-keywords": 1,
+    "keyword-spacing": 1,
     "space-before-blocks": 1,
     "no-multi-spaces": 1,
     "no-multiple-empty-lines": [1, {max: 1}],
