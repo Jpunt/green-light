@@ -39,7 +39,7 @@ describe('API', () => {
       .then(done, done);
   });
 
-  it(`initializes multiple API's`, (done) => {
+  it("initializes multiple API's", (done) => {
     expect(GL.API.getByName('a')).not.to.exist;
     expect(GL.API.getByName('b')).not.to.exist;
 

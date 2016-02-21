@@ -28,7 +28,7 @@
     "indent": [1, 2, {"SwitchCase": 1}],
     "linebreak-style": [1, "unix"],
     "no-extra-semi": 1,
-    "quotes": [1, "single"],
+    "quotes": [1, "single", "avoid-escape"],
     "valid-typeof": 1,
     "semi-spacing": [1, {"before": false, "after": true}],
     "brace-style": [1, "1tbs", { "allowSingleLine": true }],
