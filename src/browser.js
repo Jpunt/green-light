@@ -27,9 +27,11 @@ export default class Browser {
     }
 
     // Setup console
+    this.virtualConsole = jsdom.createVirtualConsole();
     if (this.config.verbose) {
-      this.virtualConsole = jsdom.createVirtualConsole();
       this.virtualConsole.sendTo(console);
+    } else {
+      this.virtualConsole.on('error', (...args) => console.error(...args));
     }
 
     return Promise.resolve();
@@ -45,9 +47,8 @@ export default class Browser {
     return this._getDOM(url)
       .then(window => this.config.setupWindow(window))
       .catch(err => {
-        console.error('Something went wrong');
-        console.error('url:', url);
-        console.error('error:', err);
+        console.error(`Something went wrong at: ${url}`);
+        console.trace(err);
       });
   }
 
