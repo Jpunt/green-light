@@ -251,6 +251,9 @@ Now we can configure the last step in `test/runner.js`:
 Remove that debugging and you should be good to go:
 
 ```js
+require('babel-register');
+const GreenLight = require('green-light');
+
 GreenLight
   .init()
   .then(() => {
