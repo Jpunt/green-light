@@ -41,7 +41,7 @@
   "dependencies": {
     "chai": "^3.5.0",
     "command-line-args": "^2.1.4",
-    "glob": "^7.0.0",
+    "glob": "^7.0.3",
     "jsdom": "^8.0.2",
     "lodash": "^4.3.0",
     "mocha": "^2.4.5",
