@@ -7,6 +7,11 @@ import Target from './target';
 import Browser from './browser';
 import Tests from './tests';
 
+const readLine = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
 export default class GreenLight {
   constructor() {
     this.api = null;
@@ -22,6 +27,19 @@ export default class GreenLight {
     this.Tests = Tests;
 
     this.expect = Chai.expect;
+
+    this.pause = (test) => {
+      console.log(`Paused at: ${this.browser.url}`);
+      const originalTimeout = test.timeout;
+      test.timeout(null);
+      return new Promise((resolve, reject) => {
+        readLine.question('Press enter to continue.', () => {
+          test.timeout(originalTimeout);
+          readLine.close();
+          reject(new Error('Test is considered invalid because it was paused.'));
+        });
+      });
+    };
   }
 
   init() {

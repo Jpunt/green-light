@@ -28,12 +28,10 @@ export default class Browser {
 
     // Setup console
     this.virtualConsole = jsdom.createVirtualConsole();
-    this.virtualConsole.on('error', (...args) => {
-      console.log('\x1b[31m', ...args, '\x1b[0m');
-    });
+    this.virtualConsole.on('error', (...errors) => console.log('\x1b[31m', ...errors, '\x1b[0m'));
     if (this.config.verbose) {
       // Errors are logged weither or not verbose is enabled,
-      // so we don't have to pass those as here again.
+      // so we don't have to pass those here again.
       this.virtualConsole.sendTo(Object.assign(console, { error:null }));
     }
 
@@ -42,6 +40,7 @@ export default class Browser {
 
   go(path) {
     const url = this.config.baseUrl + path;
+    this.url = url;
 
     if (this.config.verbose) {
       console.log('Going to url:', url);
