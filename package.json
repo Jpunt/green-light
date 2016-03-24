@@ -1,6 +1,6 @@
 {
   "name": "green-light",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "author": "Jasper Haggenburg",
   "description": "An opinionated (but complete) set of tools for functional testing",
   "license": "ISC",
