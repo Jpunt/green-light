@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { spawn } from 'child_process';
+import poll from 'promise-poller';
 
 export default class Target {
   constructor(config) {
@@ -11,7 +12,7 @@ export default class Target {
       cwd: config.cwd,
       checkUrl: config.checkUrl,
       checkInterval: config.checkInterval || 1000,
-      // TODO: checkTimeout
+      checkTimeout: config.checkTimeout || (1000 * 60 * 5),
     };
 
     if (!this.config.command) {
@@ -77,19 +78,11 @@ export default class Target {
         this.process.stderr.pipe(process.stderr);
       }
 
-      // TODO: Use poll() instead: https://www.npmjs.com/package/promise-poll
-      const interval = setInterval(() => {
-        this.check()
-          .then(() => {
-            clearInterval(interval);
-            resolve();
-          })
-          .catch(() => {
-            if (this.config.verbose) {
-              console.log(`Target not ready yet, retry in ${this.config.checkInterval}ms`);
-            }
-          });
-      }, this.config.checkInterval);
+      poll({
+        taskFn: () => this.check(),
+        interval: this.config.checkInterval,
+        timeout: this.config.checkTimeout,
+      }).then(resolve, reject);
     });
   }
 }

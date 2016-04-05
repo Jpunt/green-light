@@ -25,6 +25,7 @@ Option | Type | Description
 `cwd` | `String` | The current working directory of the command (only if you need it, because you can't do something like `cd app/whatever/path && npm start`)
 `checkUrl` | `String` | The URL which will be polled to know it's ready (usually the homepage or a status-page of some sorts)
 `checkInterval` | `Integer` | The speed of polling in `ms` (default: `1000`)
+`checkTimeout` | `Integer` | The maximum time of polling in `ms` (default: `1000`)
 
 ## Command line overrides
 You can override configuration through the CLI:
@@ -36,5 +37,6 @@ Command | Description
 `--target-cwd` | The current working directory of the command
 `--target-checkUrl` | The URL which will be polled to know it's ready
 `--target-checkInterval` | The speed of polling in `ms`
+`--target-checkTimeout` | The maximum time of polling in `ms`
 
 [Read this](./command-line-overrides.md) for more information about command line overrides.
