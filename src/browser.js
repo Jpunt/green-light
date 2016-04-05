@@ -47,11 +47,20 @@ export default class Browser {
     }
 
     return this._getDOM(url)
-      .then(window => this.config.setupWindow(window))
+      .then(window => {
+        this.window = window;
+        return this.config.setupWindow(window);
+      })
       .catch(err => {
         console.error(`Something went wrong at: ${url}`);
         console.trace(err);
       });
+  }
+
+  reset() {
+    if (this.window) {
+      this.window.close();
+    }
   }
 
   _getDOM(url) {
