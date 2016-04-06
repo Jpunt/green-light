@@ -23,9 +23,12 @@ Command | Description
 `--target-cwd` | The current working directory of the command
 `--target-checkUrl` | The URL which will be polled to know it's ready
 `--target-checkInterval` | The speed of polling in `ms`
+`--target-checkTimeout` | The maximum amount of polling in `ms`
 `--browser-verbose` | Enables extensive logging
 `--browser-jQuery` | Injects `jQuery` into the browser
 `--browser-baseUrl` | The URL to be used as the base for `go()` calls
+`--browser-readyWhenInterval` | The speed of polling in `ms`
+`--browser-readyWhenTimeout` | The maximum amount of polling in `ms`
 `--tests-verbose` | Enables extensive logging
 `--tests-glob` | Pattern to find your tests
 `--tests-mocha-grep` | The `grep` option for Mocha

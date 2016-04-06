@@ -19,6 +19,7 @@ const cli = commandLineArgs([
   { name: 'target-cwd', type: String },
   { name: 'target-checkUrl', type: String },
   { name: 'target-checkInterval', type: Number },
+  { name: 'target-checkTimeout', type: Number },
 
   /*
    * Browser
