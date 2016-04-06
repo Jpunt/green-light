@@ -82,6 +82,8 @@ export default class Target {
         taskFn: () => this.check(),
         interval: this.config.checkInterval,
         timeout: this.config.checkTimeout,
+        // timeout: this.config.checkTimeout,
+        retries: this.config.checkTimeout / this.config.checkInterval, // Tmp fix for: https://github.com/joeattardi/promise-poller/issues/4
       }).then(resolve, reject);
     });
   }
