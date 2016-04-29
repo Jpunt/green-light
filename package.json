@@ -45,7 +45,7 @@
     "jsdom": "^8.0.2",
     "lodash": "^4.3.0",
     "mocha": "^2.4.5",
-    "mocked-api": "^0.6.3",
+    "mocked-api": "^0.6.4",
     "node-fetch": "^1.4.1",
     "promise-poller": "^1.3.0",
     "terminate": "^1.0.8"
