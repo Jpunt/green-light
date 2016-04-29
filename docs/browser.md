@@ -22,7 +22,10 @@ Option | Type | Description
 `verbose` | `Boolean` | Enables extensive logging
 `baseUrl` | `String` | The URL to be used as the base for `go()` calls. This usually is the domain where your target is running
 `jQuery` | `Boolean` | Injects `jQuery` into the browser
-`setupWindow` | `Function` | Add extra helper-methods for your tests here, or wait for the client to be initialized with a `Promise`
+`setupWindow` | `Function` | Add extra helper-methods for your tests here.
+`readyWhen` | `Function` | Whether or not `window` is ready to be tested.
+`readyWhenInterval` | `Integer` | The speed of polling in `ms` (default: `10`)
+`readyWhenTimeout` | `Integer` | The maximum amount of polling in `ms` (default: `2000`)
 
 ## Usage
 The configured browser will be exposed by GreenLight:
@@ -46,6 +49,27 @@ browser
   });
 ```
 
+## readyWhen
+When the client needs more time to be ready, you can use `readyWhen`:
+
+```js
+GreenLight
+  .init()
+  .then(() => {
+    return GreenLight.runBrowser({
+      baseUrl: 'http://localhost:8000',
+      readyWhen: (window) => {
+        return document.body.classList.contains('initialized');
+        // ...or whatever your client does when it's ready, it may also be something like:
+        // return window.isInitialized === true;
+      }
+    });
+  })
+});
+```
+
+The `readyWhen` function will be called every couple of ms (configurable with `readyWhenInterval`) and it will time out when it takes too long (configurable with `readyWhenTimeout`). When you don't configure `readyWhen`, the client is considered ready immediately.
+
 ## Command line overrides
 You can override configuration through the CLI:
 
@@ -54,5 +78,7 @@ Command | Description
 `--browser-verbose` | Enables extensive logging
 `--browser-jQuery` | Injects `jQuery` into the browser
 `--browser-baseUrl` | The URL to be used as the base for `go()` calls
+`--browser-readyWhenInterval` | The speed of polling in `ms`
+`--browser-readyWhenTimeout` | The maximum amount of polling in `ms`
 
 [Read this](./command-line-overrides.md) for more information about command line overrides.

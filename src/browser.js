@@ -1,7 +1,7 @@
 import jsdom from 'jsdom';
-
 import path from 'path';
 import fs from 'fs';
+import poll from 'promise-poller';
 
 export default class Browser {
   constructor(config) {
@@ -9,7 +9,10 @@ export default class Browser {
       verbose: config.verbose,
       baseUrl: config.baseUrl,
       jQuery: config.jQuery,
-      setupWindow: config.setupWindow || (w => Promise.resolve(w)),
+      setupWindow: config.setupWindow || (w => w),
+      readyWhen: config.readyWhen || (w => true),
+      readyWhenInterval: config.readyWhenInterval || 10,
+      readyWhenTimeout: config.readyWhenTimeout || 2000,
     };
 
     if (!this.config.baseUrl) {
@@ -47,11 +50,20 @@ export default class Browser {
     }
 
     return this._getDOM(url)
-      .then(window => this.config.setupWindow(window))
+      .then(window => this.window = window)
+      .then(() => this._waitForReady(this.window))
+      .then(() => this.config.setupWindow(this.window))
+      .then(() => this.window)
       .catch(err => {
         console.error(`Something went wrong at: ${url}`);
         console.trace(err);
       });
+  }
+
+  reset() {
+    if (this.window) {
+      this.window.close();
+    }
   }
 
   _getDOM(url) {
@@ -75,5 +87,14 @@ export default class Browser {
         },
       });
     });
+  }
+
+  _waitForReady(window) {
+    return poll({
+      taskFn: () => this.config.readyWhen(window) ? Promise.resolve() : Promise.reject(),
+      interval: this.config.readyWhenInterval,
+      // timeout: this.config.readyWhenTimeout,
+      retries: this.config.readyWhenTimeout / this.config.readyWhenInterval, // Tmp fix for: https://github.com/joeattardi/promise-poller/issues/4
+    }).catch(err => Promise.reject(new Error('browser timeout')));
   }
 }
