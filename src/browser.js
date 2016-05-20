@@ -63,6 +63,7 @@ export default class Browser {
   reset() {
     if (this.window) {
       this.window.close();
+      delete this.window;
     }
   }
 
