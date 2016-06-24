@@ -143,10 +143,11 @@ export default class GreenLight {
     }
 
     this.tests = new Tests(config);
-    return this.tests.start().then(() => {
+    return this.tests.start().then(failures => {
       if (config.verbose) {
         console.log('Tests ready');
       }
+      return failures;
     });
   }
 }
