@@ -31,11 +31,11 @@ export default class Browser {
 
     // Setup console
     this.virtualConsole = jsdom.createVirtualConsole();
-    this.virtualConsole.on('error', (...errors) => console.log('\x1b[31m', ...errors, '\x1b[0m'));
+    const logError = (...output) => console.log('\x1b[31m', ...output, '\x1b[0m');
     if (this.config.verbose) {
-      // Errors are logged weither or not verbose is enabled,
-      // so we don't have to pass those here again.
-      this.virtualConsole.sendTo(Object.assign(console, { error:null }));
+      this.virtualConsole.sendTo(Object.assign({}, console, { error:logError }));
+    } else {
+      this.virtualConsole.sendTo({ error: logError });
     }
 
     return Promise.resolve();
