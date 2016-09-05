@@ -57,6 +57,7 @@ export default class Browser {
       .catch(err => {
         console.error(`Something went wrong at: ${url}`);
         console.trace(err);
+        throw err;
       });
   }
 
