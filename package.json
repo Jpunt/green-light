@@ -36,7 +36,7 @@
     "babel-register": "^6.5.1",
     "eslint": "^3.7.1",
     "express": "^4.13.4",
-    "mock-require": "^1.2.1"
+    "mock-require": "^2.0.0"
   },
   "dependencies": {
     "chai": "^3.5.0",
