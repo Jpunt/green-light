@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "chai": "^3.5.0",
-    "command-line-args": "^2.1.4",
+    "command-line-args": "^4.0.1",
     "glob": "^7.0.3",
     "jsdom": "^9.0.0",
     "lodash": "^4.3.0",

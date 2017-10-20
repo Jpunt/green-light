@@ -37,7 +37,9 @@ const cli = commandLineArgs([
   { name: 'tests-mocha-ui', type: String },
   { name: 'tests-mocha-reporter', type: String },
   { name: 'tests-mocha-timeout', type: Number },
-]);
+], {
+  partial: true,
+});
 
 export function parseConfigFor(name, config) {
   if (process.env.NODE_ENV == 'green-light') {
