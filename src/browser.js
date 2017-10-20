@@ -93,7 +93,8 @@ export default class Browser {
 
   _waitForReady(window) {
     return poll({
-      taskFn: () => this.config.readyWhen(window) ? Promise.resolve() : Promise.reject(),
+      taskFn: () => this.config.readyWhen(window) ? Promise.resolve(true) : Promise.reject(),
+      shouldContinue: (err, ready) => !ready,
       interval: this.config.readyWhenInterval,
       // timeout: this.config.readyWhenTimeout,
       retries: this.config.readyWhenTimeout / this.config.readyWhenInterval, // Tmp fix for: https://github.com/joeattardi/promise-poller/issues/4
